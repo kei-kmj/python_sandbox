@@ -21,7 +21,7 @@ class APIClient:
         status = self.get_status()
         if status["capacity"] == "Full":
             return "No capacity"
-        elif status["capacity"] == "Available":
+        elif status["capacity"] in ["Few left", "Limited availability", "Available"]:
             return "Capacity available"
         else:
             return "Status check failed"

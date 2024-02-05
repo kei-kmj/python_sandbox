@@ -15,8 +15,9 @@ class TestAPIClient:
         self.mock_get_status.return_value = {"capacity": "Full"}
         assert self.client.check_capacity() == "No capacity"
 
-    def test_check_capacity_available(self):
-        self.mock_get_status.return_value = {"capacity": "Available"}
+    @pytest.mark.parametrize("capacity", ["Few left", "Limited availability", "Available"])
+    def test_check_capacity_available(self, capacity):
+        self.mock_get_status.return_value = {"capacity": capacity}
         assert self.client.check_capacity() == "Capacity available"
 
     def test_check_capacity_failed(self):
